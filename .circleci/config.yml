@@ -1,0 +1,32 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  runthefirst:
+    executor: python/default
+    steps:
+      - checkout
+      - python/load-cache
+      - python/install-deps
+      - python/save-cache
+      - run:
+          command: python biwascrap.py
+          name: First-script
+    runthesecond:
+      executor: python/default
+      steps:
+        - checkout
+        - python/load-cache
+        - python/install-deps
+        - python/save-cache
+        - run:
+            command: python oautosaiqy.py
+            name: Second-script
+
+workflows:
+  main:
+    jobs:
+      - runthefirst
+      - runthesecond
